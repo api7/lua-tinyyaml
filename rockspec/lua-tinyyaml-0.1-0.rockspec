@@ -9,7 +9,6 @@ description = {
    summary = "a tiny yaml (subset) parser for pure lua",
    homepage = "https://github.com/api7/lua-tinyyaml",
    license = "MIT License",
-   maintainer = "Yuansheng Wang <membphis@gmail.com>"
 }
 
 build = {
