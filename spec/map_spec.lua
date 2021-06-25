@@ -39,5 +39,78 @@ busted.describe("map", function()
             - a: 1
         ]])
       )
+
+      assert.same(
+        {
+          a = {{b = {c = 1}}}
+        },
+        yaml.parse([[
+          a:
+          - b:
+              c: 1
+          ]])
+        )
+  end)
+
+  busted.it("map with slash for item", function()
+
+    assert.same(
+        {
+          value = {"a/1"}
+        },
+        yaml.parse([[
+          value:
+            - a/1
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"/1"}
+        },
+        yaml.parse([[
+          value:
+            - /1
+        ]])
+      )
+  end)
+
+  busted.it("map with underscore for item", function()
+
+    assert.same(
+        {
+          value = {"a_1"}
+        },
+        yaml.parse([[
+          value:
+            - a_1
+        ]])
+      )
+  end)
+
+  busted.it("map with dash for item", function()
+
+    assert.same(
+        {
+          value = {"a-1"}
+        },
+        yaml.parse([[
+          value:
+            - a-1
+        ]])
+      )
+  end)
+
+  busted.it("map with space for item", function()
+
+    assert.same(
+        {
+          value = {"a 1"}
+        },
+        yaml.parse([[
+          value:
+            - a 1
+        ]])
+      )
   end)
 end)

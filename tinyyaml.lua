@@ -510,7 +510,7 @@ local function parseseq(line, lines, indent)
     end
     local rest = ssub(line, j+1)
 
-    if sfind(rest, '^[^\'\"%s]*:%s') then
+    if sfind(rest, '^[^\'\"%s]*:$') or sfind(rest, '^[^\'\"%s]*:%s.') then
       -- Inline nested hash
       local indent2 = j
       lines[1] = string.rep(' ', indent2)..rest
@@ -677,6 +677,8 @@ function parsemap(line, lines, indent)
       end
       if sfind(lines[1], '^%s*%-') then
         local indent2 = countindent(lines[1])
+        local inspect = require("inspect")
+        --error(inspect(lines) .. " " .. indent2)
         map[key] = parseseq('', lines, indent2)
       elseif sfind(lines[1], '^%s*%?') then
         local indent2 = countindent(lines[1])
