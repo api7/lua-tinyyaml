@@ -677,8 +677,6 @@ function parsemap(line, lines, indent)
       end
       if sfind(lines[1], '^%s*%-') then
         local indent2 = countindent(lines[1])
-        local inspect = require("inspect")
-        --error(inspect(lines) .. " " .. indent2)
         map[key] = parseseq('', lines, indent2)
       elseif sfind(lines[1], '^%s*%?') then
         local indent2 = countindent(lines[1])
