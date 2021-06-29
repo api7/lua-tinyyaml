@@ -56,21 +56,20 @@ busted.describe("map", function()
 
     assert.same(
         {
-          value = {"a/1"}
+          value = "/a"
         },
         yaml.parse([[
-          value:
-            - a/1
+          value: /a
         ]])
       )
 
     assert.same(
         {
-          value = {"/1"}
+          value = {"/a"}
         },
         yaml.parse([[
           value:
-            - /1
+            - /a
         ]])
       )
   end)
@@ -79,11 +78,20 @@ busted.describe("map", function()
 
     assert.same(
         {
-          value = {"a_1"}
+          value = "_a"
+        },
+        yaml.parse([[
+          value: _a
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"_a"}
         },
         yaml.parse([[
           value:
-            - a_1
+            - _a
         ]])
       )
   end)
@@ -92,16 +100,34 @@ busted.describe("map", function()
 
     assert.same(
         {
-          value = {"a-1"}
+          value = "-a"
+        },
+        yaml.parse([[
+          value: -a
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"-a"}
         },
         yaml.parse([[
           value:
-            - a-1
+            - -a
         ]])
       )
   end)
 
   busted.it("map with space for item", function()
+
+    assert.same(
+        {
+          value = "a 1"
+        },
+        yaml.parse([[
+          value: a 1
+        ]])
+      )
 
     assert.same(
         {
