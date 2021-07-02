@@ -510,10 +510,11 @@ local function parseseq(line, lines, indent)
     end
     local rest = ssub(line, j+1)
 
-    if sfind(rest, '^[^\'\"%s]*:$') or sfind(rest, '^[^\'\"%s]*:%s.') then
+    if sfind(rest, '^[^\'\"%s]*:%s*$') or sfind(rest, '^[^\'\"%s]*:%s+.') then
       -- Inline nested hash
       -- There are two patterns need to match as inline nested hash
-      --   first should end with `:`, and the second should have value after `: `
+      --   first one should have no other characters except whitespace after `:`
+      --   and the second one should have characters besides whitespace after `:`
       --
       --  value:
       --    - foo:

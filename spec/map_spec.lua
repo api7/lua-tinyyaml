@@ -50,6 +50,18 @@ busted.describe("map", function()
               c: 1
           ]])
         )
+
+      -- trailing whitespace after colon
+      assert.same(
+        {
+          a = {{b = {c = 1}}}
+        },
+        yaml.parse([[
+          a:
+          - b:  
+              c:  1
+          ]])
+        )
   end)
 
   busted.it("map with slash for item", function()
