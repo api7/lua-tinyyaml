@@ -512,6 +512,23 @@ local function parseseq(line, lines, indent)
 
     if sfind(rest, '^[^\'\"%s]*:$') or sfind(rest, '^[^\'\"%s]*:%s.') then
       -- Inline nested hash
+      -- There are two patterns need to match as inline nested hash
+      --   first should end with `:`, and the second should have value after `: `
+      --
+      --  value:
+      --    - foo:
+      --        bar: 1
+      --
+      -- and
+      --
+      --  value:
+      --    - foo: bar
+      --
+      -- And there is one pattern should not be matched, where there is no space after `:`
+      --   in below, `foo:bar` should be parsed into a single string
+      --
+      -- value:
+      --   - foo:bar
       local indent2 = j
       lines[1] = string.rep(' ', indent2)..rest
       tinsert(seq, parsemap('', lines, indent2))
