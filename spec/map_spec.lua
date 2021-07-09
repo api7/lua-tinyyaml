@@ -39,5 +39,116 @@ busted.describe("map", function()
             - a: 1
         ]])
       )
+
+      assert.same(
+        {
+          a = {{b = {c = 1}}}
+        },
+        yaml.parse([[
+          a:
+          - b:
+              c: 1
+          ]])
+        )
+
+      -- trailing whitespace after colon
+      assert.same(
+        {
+          a = {{b = {c = 1}}}
+        },
+        yaml.parse([[
+          a:
+          - b:  
+              c:  1
+          ]])
+        )
+  end)
+
+  busted.it("map with slash for item", function()
+
+    assert.same(
+        {
+          value = "/a"
+        },
+        yaml.parse([[
+          value: /a
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"/a"}
+        },
+        yaml.parse([[
+          value:
+            - /a
+        ]])
+      )
+  end)
+
+  busted.it("map with underscore for item", function()
+
+    assert.same(
+        {
+          value = "_a"
+        },
+        yaml.parse([[
+          value: _a
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"_a"}
+        },
+        yaml.parse([[
+          value:
+            - _a
+        ]])
+      )
+  end)
+
+  busted.it("map with dash for item", function()
+
+    assert.same(
+        {
+          value = "-a"
+        },
+        yaml.parse([[
+          value: -a
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"-a"}
+        },
+        yaml.parse([[
+          value:
+            - -a
+        ]])
+      )
+  end)
+
+  busted.it("map with space for item", function()
+
+    assert.same(
+        {
+          value = "a 1"
+        },
+        yaml.parse([[
+          value: a 1
+        ]])
+      )
+
+    assert.same(
+        {
+          value = {"a 1"}
+        },
+        yaml.parse([[
+          value:
+            - a 1
+        ]])
+      )
   end)
 end)
