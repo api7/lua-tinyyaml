@@ -35,6 +35,9 @@ jobs:
               echo "commit format is not correct"
               exit 1
           fi
+          if [ ! -e rockspec/api7-lua-tinyyaml-${withoutv}-0.rockspec ]; then
+              exit 1
+          fi
 
       - name: Create Release
         uses: actions/create-release@v1
@@ -51,4 +54,4 @@ jobs:
           LUAROCKS_TOKEN: ${{ secrets.LUAROCKS_TOKEN }}
         run: |
           luarocks install dkjson
-          luarocks upload rockspec/lua-tinyyaml-${{ steps.release_env.outputs.version_withou_v }}-0.rockspec --api-key=${LUAROCKS_TOKEN}
+          luarocks upload rockspec/api7-lua-tinyyaml-${{ steps.release_env.outputs.version_withou_v }}-0.rockspec --api-key=${LUAROCKS_TOKEN}
