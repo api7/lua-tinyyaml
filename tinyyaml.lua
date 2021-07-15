@@ -717,7 +717,7 @@ end
 -- : (list<str>)->dict
 local function parsedocuments(lines)
   lines = select(lines, function(s) return not isemptyline(s) end)
-
+  if #lines == 0 then return nil end
   if sfind(lines[1], '^%%YAML') then tremove(lines, 1) end
 
   local root = {}
@@ -781,7 +781,9 @@ local function parse(source)
   end
 
   local docs = parsedocuments(lines)
-  if #docs == 1 then
+  if docs == nil then
+    return nil
+  elseif #docs == 1 then
     return docs[1]
   end
 
